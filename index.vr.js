@@ -28,7 +28,7 @@ export default class repo2 extends React.Component {
             height: 1280,
             transform: [
               {rotateY: -45},
-              {translate: [-400, 600, 10]},
+              {translate: [-100, 655, 0]},
               {scale: 0.25}
             ],
           }}/>
@@ -36,11 +36,11 @@ export default class repo2 extends React.Component {
           source={asset('ghazal 1-Eng.png')}
           style={{
             position: 'absolute',
-            width: 779,
-            height: 493,
+            width: 600,
+            height: 500,
             transform: [
               {rotateY: -45},
-              {translate: [-50, 250, 0]},
+              {translate: [-300, 275, -50]},
               {scale: 0.5}
             ],
           }}/>
