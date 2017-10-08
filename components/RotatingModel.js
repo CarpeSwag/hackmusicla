@@ -4,31 +4,31 @@ import {
 	asset,
 	Model,
 	VrButton,
+	Animated,
 } from 'react-vr';
 
 const VrSoundEffects = require('VrSoundEffects');
 
 export default class RotatingModel extends React.Component {
-	
-	// constructor(props) {
-	// 	super(props);
-	// 	VrSoundEffects.load(asset(this.props.onClickSound));
-	// }
 
-	// play_sound() {
-	// 	console.log('Playing some sound');
-	// 	VrSoundEffects.play(asset(this.props.onClickSound));
-	// }
+	load_music() {
+		VrSoundEffects.load(asset(this.props.xonClickSound));
+	}
 
-	stop_sound() {
-		VrSoundEffects.unload(asset(this.props.onClickSound));
+	start_music() {
+		VrSoundEffects.play(asset(this.props.xonClickSound));
+	}
+
+	stop_music() {
+		//VrSoundEffects.unload(asset(this.props.xonClickSound));
 	}
 
 	render() {
 		return (
 			<VrButton
-				//onClick={() => this._play_sound()}
-				onClickSound={asset(this.props.onClickSound)}>
+				onEnter={() => this.load_music()}
+				onClick={() => this.start_music()}
+				onLongClick={() => this.stop_music()}>
 				<Model
 					source={{
 						obj: asset(this.props.obj),
@@ -44,7 +44,8 @@ export default class RotatingModel extends React.Component {
 								this.props.z
 							]}
 						],
-					}} />
+					}}
+					lit={true} />
 			</VrButton>
 		);
 	}
