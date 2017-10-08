@@ -15,7 +15,7 @@ export default class RotatingModel extends React.Component {
 		super(props);
 		this.state = {
 			rotation: 0,
-			yOff: 0,
+			yOsc: 0,
 			yDir: 1,
 		};
 		
@@ -29,14 +29,14 @@ export default class RotatingModel extends React.Component {
 			newRotate = 0;
 		}
 		var dir = this.state.yDir;
-		var yOffset = this.state.yOff + dir * 0.01;
+		var yOffset = this.state.yOsc + dir * 0.01;
 		if (yOffset >= 0.5 || yOffset <= -0.5) {
 			dir *= -1;
 		}
 		
 		this.setState({
 			rotation: newRotate,
-			yOff: yOffset,
+			yOsc: yOffset,
 			yDir: dir,
 		});
 		window.requestAnimationFrame(this.animate);
@@ -72,10 +72,15 @@ export default class RotatingModel extends React.Component {
 					style={{
 						position: 'absolute',
 						transform: [
+						{translate: [
+								this.props.xOff / 10,
+								this.props.yOff / 10,
+								this.props.zOff / 10
+							]},
 							{rotateY: -45},
 							{translate: [
 								this.props.x,
-								this.props.y + this.state.yOff,
+								this.props.y + this.state.yOsc,
 								this.props.z
 							]},
 							{rotateY: this.state.rotation}

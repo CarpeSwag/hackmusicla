@@ -91,15 +91,39 @@ export default class repo2 extends React.Component {
 					xonClickSound={['sounds/traditional_music.mp3']}
 					currMusic={this.state.currMusic}
 					clickCallback={this.changeMusic}
-					x={0} y={-10} z={25} />
+					x={-15} y={-10} z={25}
+					xOff={this.state.x} yOff={this.state.y}
+					zOff={this.state.z}  />
 
 				<RotatingModel
 					obj='setar.obj'
 					mtl='setar.mtl'
-					xonClickSound={['sounds/bgmusic.mp3']}
+					xonClickSound={['sounds/Setar Sound.wav']}
 					currMusic={this.state.currMusic}
 					clickCallback={this.changeMusic}
-					x={25} y={-10} z={25} />
+					x={0} y={-10} z={25}
+					xOff={this.state.x} yOff={this.state.y}
+					zOff={this.state.z}  />
+					
+				<RotatingModel
+					obj='tar.obj'
+					mtl='tar.mtl'
+					xonClickSound={['sounds/Tar music.wav']}
+					currMusic={this.state.currMusic}
+					clickCallback={this.changeMusic}
+					x={15} y={-10} z={25}
+					xOff={this.state.x} yOff={this.state.y}
+					zOff={this.state.z}  />
+					
+				<RotatingModel
+					obj='tombak.obj'
+					mtl='tombak.mtl'
+					xonClickSound={['sounds/Tonbak Sound.wav']}
+					currMusic={this.state.currMusic}
+					clickCallback={this.changeMusic}
+					x={15} y={-10} z={10}
+					xOff={this.state.x} yOff={this.state.y}
+					zOff={this.state.z}  />
 			
 				<AmbientLight intensity={0.2}/>
 				<DirectionalLight intensity={2}/>
