@@ -3,6 +3,7 @@ import {
   AppRegistry,
   asset,
   Pano,
+  Image,
   Text,
   View,
 } from 'react-vr';
@@ -19,20 +20,30 @@ export default class repo2 extends React.Component {
           asset('img_right_far.jpg'),
           asset('img_center.jpg'),
         ]} />
-        <Text
+        <Image 
+          source={asset('ghazal 1.png')}
           style={{
-            backgroundColor: '#777879',
-            fontSize: 0.8,
-            fontWeight: '400',
-            layoutOrigin: [0.5, 0.5],
-            paddingLeft: 0.2,
-            paddingRight: 0.2,
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            transform: [{translate: [0, 0, -3]}],
-          }}>
-          hello
-        </Text>
+            position: 'absolute',
+            width: 800,
+            height: 1280,
+            transform: [
+              {rotateY: -45},
+              {translate: [-400, 600, 10]},
+              {scale: 0.25}
+            ],
+          }}/>
+          <Image 
+          source={asset('ghazal 1-Eng.png')}
+          style={{
+            position: 'absolute',
+            width: 779,
+            height: 493,
+            transform: [
+              {rotateY: -45},
+              {translate: [-50, 250, 0]},
+              {scale: 0.5}
+            ],
+          }}/>
       </View>
     );
   }
