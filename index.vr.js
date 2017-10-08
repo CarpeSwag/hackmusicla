@@ -32,11 +32,13 @@ export default class repo2 extends React.Component {
 			x -= (ie.keyCode == 39)? MOVEMENT:0;
 			z -= (ie.keyCode == 40)? MOVEMENT:0;
 			
-			
-			this.setState({
-				x: x,
-				z: z
-			});
+			var THRESHOLD = 500;
+			if (THRESHOLD - Math.sqrt(x*x + z*z) >= 0) {
+				this.setState({
+					x: x,
+					z: z
+				});
+			}
 		}
 	}
 
