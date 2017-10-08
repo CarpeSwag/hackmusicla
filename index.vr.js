@@ -11,7 +11,14 @@ export default class repo2 extends React.Component {
   render() {
     return (
       <View>
-        <Pano source={asset('chess-world.jpg')}/>
+        <Pano source={[
+          asset('img_left.jpg'),
+          asset('img_right.jpg'),
+          asset('img_top.jpg'),
+          asset('img_bot.jpg'),
+          asset('img_right_far.jpg'),
+          asset('img_center.jpg'),
+        ]} />
         <Text
           style={{
             backgroundColor: '#777879',
