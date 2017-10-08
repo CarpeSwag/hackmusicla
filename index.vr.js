@@ -104,8 +104,8 @@ export default class repo2 extends React.Component {
 						source={asset("book.png")}
 						style = {{
 							position: 'absolute',
-							width: 100,
-							height: 100,
+							width: 300,
+							height: 300,
 							transform: [
 								{translate: [this.state.x, this.state.y, this.state.z]},
 								{rotateY: -45},
