@@ -18,6 +18,11 @@ export default class Poem extends React.Component {
 					width: this.props.width,
 					height: this.props.height,
 					transform: [
+						{translate: [
+							this.props.xOff,
+							this.props.yOff,
+							this.props.zOff
+						]},
 						{rotateY: -45},
 						{translate: [
 							this.props.x,
