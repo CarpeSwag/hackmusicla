@@ -15,6 +15,23 @@ export default class RotatingModel extends React.Component {
 		super(props);
 	}
 	
+	renderSounds() {
+		var paths = this.props.xonClickSound;
+		var sounds = [];
+		for (var i = 0; i < paths.length; ++i) {
+			var sound = (
+				<Sound key={i}
+					source={asset(paths[i])}
+					playControl={
+						((this.props.currMusic === paths[i])?
+							'play': 'stop')
+					} />
+			);
+			sounds.push(sound);
+		}
+		return sounds;
+	}
+	
 	render() {
 		return (
 			<VrButton
@@ -38,12 +55,8 @@ export default class RotatingModel extends React.Component {
 					}}
 					lit={true} />
 				
-				<Sound source={asset(this.props.xonClickSound)}
-					playControl={
-						((this.props.currMusic
-							=== this.props.xonClickSound)?
-							'play': 'stop')
-					} />
+				{this.renderSounds()}
+				
 			</VrButton>
 		);
 	}
