@@ -6,8 +6,8 @@ import {
 	Image,
 	Text,
 	View,
-  DirectionalLight,
-  AmbientLight,
+	DirectionalLight,
+	AmbientLight,
 	VrButton,
 } from 'react-vr';
 
@@ -19,9 +19,11 @@ export default class repo2 extends React.Component {
 		super(props);
 		this.state = {
 			x: 0, y: 0, z: 0,
+			currMusic: 'nan'
 		};
 		
 		this.handleKeyDown = this.handleKeyDown.bind(this)
+		this.changeMusic = this.changeMusic.bind(this)
 	}
 	
 	handleKeyDown(e) {
@@ -44,6 +46,12 @@ export default class repo2 extends React.Component {
 				});
 			}
 		}
+	}
+	
+	changeMusic(music) {
+		this.setState({
+			currMusic: music
+		});
 	}
 
 	render() {
@@ -75,20 +83,24 @@ export default class repo2 extends React.Component {
 					xOff={this.state.x} yOff={this.state.y}
 					zOff={this.state.z} />
 
-        <RotatingModel
-          obj='gramophone.obj'
-          mtl='gramophone.mtl'
-          xonClickSound='sounds/traditional_music.mp3'
-          x={0} y={-10} z={25} />
+				<RotatingModel
+					obj='gramophone.obj'
+					mtl='gramophone.mtl'
+					xonClickSound='sounds/traditional_music.mp3'
+					currMusic={this.state.currMusic}
+					changeMusic={this.changeMusic}
+					x={0} y={-10} z={25} />
 
-        <RotatingModel
-          obj='setar.obj'
-          mtl='setar.mtl'
-          xonClickSound='sounds/bgmusic.mp3'
-          x={25} y={-10} z={25} />
-      
-        <AmbientLight intensity={0.2}/>
-        <DirectionalLight intensity={2}/>
+				<RotatingModel
+					obj='setar.obj'
+					mtl='setar.mtl'
+					xonClickSound='sounds/bgmusic.mp3'
+					currMusic={this.state.currMusic}
+					changeMusic={this.changeMusic}
+					x={25} y={-10} z={25} />
+			
+				<AmbientLight intensity={0.2}/>
+				<DirectionalLight intensity={2}/>
 
 			</View>
 		);
