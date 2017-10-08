@@ -6,14 +6,18 @@ import {
 	Image,
 	Text,
 	View,
+  PointLight
 } from 'react-vr';
+
 import Poem from './components/Poem';
+import RotatingModel from './components/RotatingModel';
 
 export default class repo2 extends React.Component {
 	render() {
 		return (
 			<View>
-				<Pano source={[
+				
+        <Pano source={[
 					asset('img_left.jpg'),
 					asset('img_right.jpg'),
 					asset('img_top.jpg'),
@@ -21,15 +25,30 @@ export default class repo2 extends React.Component {
 					asset('img_right_far.jpg'),
 					asset('img_center.jpg'),
 				]} />
-				<Poem
+				
+        <Poem
 					src='ghazal 1-Eng.png'
 					width={300} height={250}
 					x={-200} y={160} z={-200} />
-				<Poem
+				
+        <Poem
 					src='ghazal 1.png'
 					width={200} height={320}
 					x={115} y={182} z={-250} />
-			</View>
+        
+        <RotatingModel
+          obj='gramophone.obj'
+          mtl='gramophone.mtl'
+          onClickSound='sounds/traditional_music.mp3'
+          x={0} y={-10} z={25} />
+
+        <RotatingModel
+          obj='gramophone.obj'
+          mtl='gramophone.mtl'
+          onClickSound='sounds/bgmusic.mp3'
+          x={25} y={-10} z={25} />
+			
+      </View>
 		);
 	}
 };
