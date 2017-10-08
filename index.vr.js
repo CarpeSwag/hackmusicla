@@ -15,36 +15,97 @@ import Poem from './components/Poem';
 import RotatingModel from './components/RotatingModel';
 
 export default class repo2 extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			x: 0, y: 0, z: 0,
-		};
-		
-		this.handleKeyDown = this.handleKeyDown.bind(this)
-	}
+  constructor(props) {
+    super(props);
+	var x = 0;
+	var y = 0;
+	var z = 0;
+    this.state = {
+		x: x, y: y, z: z,
+		poetry: (<VrButton
+				onClick={() => this.togglePoetry(true)}>
+				<Image 
+					source={asset("book.png")}
+					style = {{
+						position: 'absolute',
+						width: 300,
+						height: 300,
+						transform: [
+							{translate: [x, y, z]},
+							{rotateY: -45},
+							{translate: [115, 200, -350]}
+						],
+					}}/>
+			</VrButton>)
+    };
+    //this.togglePoetry(false);
 	
-	handleKeyDown(e) {
-		var ie = e.nativeEvent.inputEvent;
-		if (ie.type === "KeyboardInputEvent" && 
-			ie.keyCode >= 37 && ie.keyCode <= 40) {
-			var x = this.state.x;
-			var z = this.state.z;
-			var MOVEMENT = 10;
-			x += (ie.keyCode == 37)? MOVEMENT:0;
-			z += (ie.keyCode == 38)? MOVEMENT:0;
-			x -= (ie.keyCode == 39)? MOVEMENT:0;
-			z -= (ie.keyCode == 40)? MOVEMENT:0;
-			
-			var THRESHOLD = 500;
-			if (THRESHOLD - Math.sqrt(x*x + z*z) >= 0) {
-				this.setState({
-					x: x,
-					z: z
-				});
-			}
-		}
-	}
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.togglePoetry = this.togglePoetry.bind(this)
+  }
+  
+  handleKeyDown(e) {
+    var ie = e.nativeEvent.inputEvent;
+    if (ie.type === "KeyboardInputEvent" && 
+      ie.keyCode >= 37 && ie.keyCode <= 40) {
+      var x = this.state.x;
+      var z = this.state.z;
+      var MOVEMENT = 10;
+      x += (ie.keyCode == 37)? MOVEMENT:0;
+      z += (ie.keyCode == 38)? MOVEMENT:0;
+      x -= (ie.keyCode == 39)? MOVEMENT:0;
+      z -= (ie.keyCode == 40)? MOVEMENT:0;
+      
+      var THRESHOLD = 500;
+      if (THRESHOLD - Math.sqrt(x*x + z*z) >= 0) {
+        this.setState({
+          x: x,
+          z: z
+        });
+      }
+    }
+  }
+
+  togglePoetry(flag) {
+    if (flag) {
+      this.setState({
+        poetry: (
+        <VrButton onClick={() => this.togglePoetry(false)}>
+          <Poem
+            src='ghazal 1-Eng.png'
+            width={600} height={500}
+            x={-400} y={360} z={-300}
+            xOff={this.state.x} yOff={this.state.y}
+            zOff={this.state.z} />
+          <Poem
+            src='ghazal 1.png'
+            width={400} height={640}
+            x={115} y={380} z={-350}
+            xOff={this.state.x} yOff={this.state.y}
+            zOff={this.state.z} />
+        </VrButton>
+        )
+      })  
+    } else {
+      this.setState({
+        poetry: (<VrButton
+				onClick={() => this.togglePoetry(true)}>
+				<Image 
+					source={asset("book.png")}
+					style = {{
+						position: 'absolute',
+						width: 100,
+						height: 100,
+						transform: [
+							{translate: [this.state.x, this.state.y, this.state.z]},
+							{rotateY: -45},
+							{translate: [115, 200, -350]}
+						],
+					}}/>
+			</VrButton>)
+      });
+    }
+  }
 
 	render() {
 		return (
@@ -62,18 +123,8 @@ export default class repo2 extends React.Component {
 							translate: [this.state.x,
 								this.state.y, this.state.z]
 					}]}} />
-				<Poem
-					src='ghazal 1-Eng.png'
-					width={600} height={500}
-					x={-400} y={360} z={-300}
-					xOff={this.state.x} yOff={this.state.y}
-					zOff={this.state.z} />
-				<Poem
-					src='ghazal 1.png'
-					width={400} height={640}
-					x={115} y={380} z={-350}
-					xOff={this.state.x} yOff={this.state.y}
-					zOff={this.state.z} />
+
+        {this.state.poetry}
 
         <RotatingModel
           obj='gramophone.obj'
