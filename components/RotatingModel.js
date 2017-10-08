@@ -13,6 +13,33 @@ const VrSoundEffects = require('VrSoundEffects');
 export default class RotatingModel extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			rotation: 0,
+			yOff: 0,
+			yDir: 1,
+		};
+		
+		this.animate = this.animate.bind(this)
+		window.requestAnimationFrame(this.animate);
+	}
+	
+	animate() {
+		var newRotate = this.state.rotation + 1;
+		if (newRotate >= 360) {
+			newRotate = 0;
+		}
+		var dir = this.state.yDir;
+		var yOffset = this.state.yOff + dir * 0.01;
+		if (yOffset >= 0.5 || yOffset <= -0.5) {
+			dir *= -1;
+		}
+		
+		this.setState({
+			rotation: newRotate,
+			yOff: yOffset,
+			yDir: dir,
+		});
+		window.requestAnimationFrame(this.animate);
 	}
 	
 	renderSounds() {
@@ -48,9 +75,10 @@ export default class RotatingModel extends React.Component {
 							{rotateY: -45},
 							{translate: [
 								this.props.x,
-								this.props.y,
+								this.props.y + this.state.yOff,
 								this.props.z
-							]}
+							]},
+							{rotateY: this.state.rotation}
 						],
 					}}
 					lit={true} />
