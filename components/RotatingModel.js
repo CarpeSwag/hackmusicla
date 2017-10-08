@@ -15,16 +15,11 @@ export default class RotatingModel extends React.Component {
 		super(props);
 	}
 	
-	toggleMusic() {
-		var music = (this.props.currMusic == this.props.xonClickSound)?
-			'nan': this.props.xonClickSound;
-		this.props.changeMusic(music);
-	}
-	
 	render() {
 		return (
 			<VrButton
-				onClick={() => this.toggleMusic()}>
+				onClick={() => this.props.clickCallback(
+					this.props.xonClickSound)}>
 				<Model
 					source={{
 						obj: asset(this.props.obj),

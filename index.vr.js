@@ -48,7 +48,9 @@ export default class repo2 extends React.Component {
 		}
 	}
 	
-	changeMusic(music) {
+	changeMusic(sound) {
+		var music = (this.state.currMusic == sound)?
+			'nan': sound;
 		this.setState({
 			currMusic: music
 		});
@@ -88,7 +90,7 @@ export default class repo2 extends React.Component {
 					mtl='gramophone.mtl'
 					xonClickSound='sounds/traditional_music.mp3'
 					currMusic={this.state.currMusic}
-					changeMusic={this.changeMusic}
+					clickCallback={this.changeMusic}
 					x={0} y={-10} z={25} />
 
 				<RotatingModel
@@ -96,7 +98,7 @@ export default class repo2 extends React.Component {
 					mtl='setar.mtl'
 					xonClickSound='sounds/bgmusic.mp3'
 					currMusic={this.state.currMusic}
-					changeMusic={this.changeMusic}
+					clickCallback={this.changeMusic}
 					x={25} y={-10} z={25} />
 			
 				<AmbientLight intensity={0.2}/>
