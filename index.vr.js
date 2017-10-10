@@ -9,6 +9,7 @@ import {
 	DirectionalLight,
 	AmbientLight,
 	VrButton,
+	Sound
 } from 'react-vr';
 
 import Poem from './components/Poem';
@@ -23,7 +24,8 @@ export default class repo2 extends React.Component {
 		var z = 0;
 		this.state = {
 			x: x, y: y, z: z,
-			currMusic: 'nan',
+			currMusic: 'sounds/bgmusic.mp3',
+			playMusic: 'stop'
 			poetry: (<VrButton
 				onClick={() => this.togglePoetry(true)}>
 				<Image 
@@ -73,10 +75,11 @@ export default class repo2 extends React.Component {
 	}
 	
 	changeMusic(sound) {
-		var music = (this.state.currMusic == sound[0])?
-			'nan': sound[0];
+		var off = this.state.currMusic == sound[0];
+		var music = (off)? 'sounds/bgmusic.mp3': sound[0];
 		this.setState({
-			currMusic: music
+			currMusic: music,
+			playMusic: (off)? 'play': 'stop'
 		});
 	}
 	
@@ -215,18 +218,45 @@ export default class repo2 extends React.Component {
 					xonClickSound={['sounds/traditional_music.mp3','sounds/bgmusic.mp3']}
 					currMusic={this.state.currMusic}
 					clickCallback={this.showMenu}
-					x={0} y={-10} z={25} />
+					x={-15} y={-10} z={25}
+					xOff={this.state.x} yOff={this.state.y}
+					zOff={this.state.z}  />
 
 				<RotatingModel
 					obj='setar.obj'
 					mtl='setar.mtl'
-					xonClickSound={['sounds/bgmusic.mp3']}
+					xonClickSound={['sounds/Setar Sound.wav']}
 					currMusic={this.state.currMusic}
 					clickCallback={this.changeMusic}
-					x={25} y={-10} z={25} />
+					x={0} y={-10} z={25}
+					xOff={this.state.x} yOff={this.state.y}
+					zOff={this.state.z}  />
+					
+				<RotatingModel
+					obj='tar.obj'
+					mtl='tar.mtl'
+					xonClickSound={['sounds/Tar music.wav']}
+					currMusic={this.state.currMusic}
+					clickCallback={this.changeMusic}
+					x={15} y={-10} z={25}
+					xOff={this.state.x} yOff={this.state.y}
+					zOff={this.state.z}  />
+					
+				<RotatingModel
+					obj='tombak.obj'
+					mtl='tombak.mtl'
+					xonClickSound={['sounds/Tonbak Sound.wav']}
+					currMusic={this.state.currMusic}
+					clickCallback={this.changeMusic}
+					x={15} y={-10} z={10}
+					xOff={this.state.x} yOff={this.state.y}
+					zOff={this.state.z}  />
 			
 				<AmbientLight intensity={0.2}/>
 				<DirectionalLight intensity={2}/>
+				
+				<Sound source={asset('sounds/bgmusic.mp3')}
+					playControl={this.state.playMusic} />
 
 			</View>
 		);
