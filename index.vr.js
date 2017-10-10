@@ -9,6 +9,7 @@ import {
 	DirectionalLight,
 	AmbientLight,
 	VrButton,
+	Sound
 } from 'react-vr';
 
 import Poem from './components/Poem';
@@ -19,7 +20,8 @@ export default class repo2 extends React.Component {
 		super(props);
 		this.state = {
 			x: 0, y: 0, z: 0,
-			currMusic: 'nan'
+			currMusic: 'sounds/bgmusic.mp3',
+			playMusic: 'stop'
 		};
 		
 		this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -49,10 +51,11 @@ export default class repo2 extends React.Component {
 	}
 	
 	changeMusic(sound) {
-		var music = (this.state.currMusic == sound[0])?
-			'nan': sound[0];
+		var off = this.state.currMusic == sound[0];
+		var music = (off)? 'sounds/bgmusic.mp3': sound[0];
 		this.setState({
-			currMusic: music
+			currMusic: music,
+			playMusic: (off)? 'play': 'stop'
 		});
 	}
 
@@ -127,6 +130,9 @@ export default class repo2 extends React.Component {
 			
 				<AmbientLight intensity={0.2}/>
 				<DirectionalLight intensity={2}/>
+				
+				<Sound source={asset('sounds/bgmusic.mp3')}
+					playControl={this.state.playMusic} />
 
 			</View>
 		);
